@@ -40,7 +40,21 @@ const restaurant = {
       `order recieved ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered at ${time} at ${address}`
     );
   },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
+  },
 };
+
+// rest operator
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFood);
+
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
 
 restaurant.orderDelivery({
   time: '22:30',
@@ -73,3 +87,23 @@ const [i, , [j, k]] = nested;
 //default values
 
 const [p, q, r] = [8, 9];
+
+// destructuring
+const arr = [7, 8, 9];
+console.log(...arr);
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+// copy array & join
+const mainMenuCopy = [...restaurant.mainMenu, ...restaurant.starterMenu];
+// const ingredients = [
+//   prompt('let`s make pasta! Ingredient 1?'),
+//   prompt('let`s make pasta! Ingredient 2?'),
+//   prompt('let`s make pasta! Ingredient 3?'),
+// ];
+
+// console.log(ingredients);
+// restaurant.orderPasta(...ingredients);
+
+const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Guiseppe' };
+
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorante Roma';
