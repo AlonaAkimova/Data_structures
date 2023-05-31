@@ -26,4 +26,50 @@ const restaurant = {
       close: 24,
     },
   },
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `order recieved ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered at ${time} at ${address}`
+    );
+  },
 };
+
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'asadada',
+  mainIndex: 2,
+  starterIndex: 1,
+});
+
+const { name, openingHours, categories } = restaurant;
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+
+const { menu = [], starterMenu: starters = [] } = restaurant;
+
+const {
+  fri: { open: o, close: c },
+} = openingHours;
+
+let [main, , secondary] = restaurant.categories;
+
+[main, secondary] = [secondary, main];
+console.log(restaurant.order(2, 0));
+// nested destructuring
+const nested = [2, 4, [5, 6]];
+const [i, , [j, k]] = nested;
+
+//default values
+
+const [p, q, r] = [8, 9];
