@@ -44,6 +44,10 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredient) {
+    console.log(mainIngredient, otherIngredient);
+  },
 };
 
 // rest operator
@@ -56,6 +60,16 @@ console.log(pizza, risotto, otherFood);
 const { sat, ...weekdays } = restaurant.openingHours;
 console.log(weekdays);
 
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+  console.log(sum);
+};
+
+add(2, 3);
+add(5, 3, 7, 2);
+
+restaurant.orderPizza('mushrooms', 'onions', 'olives', 'spinach');
 restaurant.orderDelivery({
   time: '22:30',
   address: 'asadada',
