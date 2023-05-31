@@ -15,7 +15,7 @@ const openingHours = {
     open: 11,
     close: 23,
   },
-  [`day-${2 + 4}`]: {
+  [weekdays[5]]: {
     open: 0, // Open 24 hours
     close: 24,
   },
@@ -50,65 +50,168 @@ const restaurant = {
   },
 };
 
+// Property names
+
+const properties = Object.keys(openingHours);
+let openStr = `We are open on ${properties.length} days: `;
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+// Property values
+
+const values = Object.values(openingHours);
+console.log(...values);
+
+// Entire object
+
+Object.entries(openingHours);
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for (const [day, { open, close }] of entries) {
+  console.log(`on ${day} we open at ${open} and close at ${close}`);
+}
+if (restaurant.openingHours && restaurant.openingHours.mon)
+  console.log(restaurant.openingHours.mon);
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burzki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Wtsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4.0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+//1
+for (const [i, player] of game.scored.entries()) {
+  console.log(`Goal ${i + 1}: ${player}`);
+}
+
+//2
+const odds = Object.values(game.odds);
+let average = 0;
+for (const odd of odds) average += odd;
+average /= odds.length;
+console.log(average);
+
+//3
+
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? 'draw' : `Victory ${game[team]}`;
+  console.log(`Odd of ${teamStr} ${odd}`);
+}
+// optional chaining
+
+// console.log(restaurant.openingHours.fri?.open);
+// const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+// for (const day of days) {
+//   console.log(day);
+//   const open = restaurant.openingHours[day]?.open ?? 'closed';
+//   console.log(`on ${day}, we open at ${open}`);
+// }
+
+// // Methods
+
+// console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+
+// // Arrays
+
+// const users = [{ name: 'Jonas', email: 'hello@jonas.io' }];
+// console.log(users[0]?.name ?? 'User array empty');
+
 // rest operator
-const [pizza, , risotto, ...otherFood] = [
-  ...restaurant.mainMenu,
-  ...restaurant.starterMenu,
-];
-console.log(pizza, risotto, otherFood);
+// const [pizza, , risotto, ...otherFood] = [
+//   ...restaurant.mainMenu,
+//   ...restaurant.starterMenu,
+// ];
+// console.log(pizza, risotto, otherFood);
 
 // const { sat, ...weekdays } = restaurant.openingHours;
-console.log(weekdays);
+// console.log(weekdays);
 
-const add = function (...numbers) {
-  let sum = 0;
-  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
-  console.log(sum);
-};
+// const add = function (...numbers) {
+//   let sum = 0;
+//   for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+//   console.log(sum);
+// };
 
-add(2, 3);
-add(5, 3, 7, 2);
+// add(2, 3);
+// add(5, 3, 7, 2);
 
-restaurant.orderPizza('mushrooms', 'onions', 'olives', 'spinach');
-restaurant.orderDelivery({
-  time: '22:30',
-  address: 'asadada',
-  mainIndex: 2,
-  starterIndex: 1,
-});
+// restaurant.orderPizza('mushrooms', 'onions', 'olives', 'spinach');
+// restaurant.orderDelivery({
+//   time: '22:30',
+//   address: 'asadada',
+//   mainIndex: 2,
+//   starterIndex: 1,
+// });
 
 // const { name, openingHours, categories } = restaurant;
-const {
-  name: restaurantName,
-  openingHours: hours,
-  categories: tags,
-} = restaurant;
+// const {
+//   name: restaurantName,
+//   openingHours: hours,
+//   categories: tags,
+// } = restaurant;
 
 // const { menu = [], starterMenu: starters = [] } = restaurant;
 
-const {
-  fri: { open: o, close: c },
-} = openingHours;
+// const {
+//   fri: { open: o, close: c },
+// } = openingHours;
 
-let [main, , secondary] = restaurant.categories;
+// let [main, , secondary] = restaurant.categories;
 
-[main, secondary] = [secondary, main];
-console.log(restaurant.order(2, 0));
-// nested destructuring
-const nested = [2, 4, [5, 6]];
-const [i, , [j, k]] = nested;
+// [main, secondary] = [secondary, main];
+// console.log(restaurant.order(2, 0));
+// // nested destructuring
+// const nested = [2, 4, [5, 6]];
+// const [i, , [j, k]] = nested;
 
-//default values
+// //default values
 
-const [p, q, r] = [8, 9];
+// const [p, q, r] = [8, 9];
 
-// destructuring
-const arr = [7, 8, 9];
-console.log(...arr);
-const newMenu = [...restaurant.mainMenu, 'Gnocci'];
-// copy array & join
-const mainMenuCopy = [...restaurant.mainMenu, ...restaurant.starterMenu];
-// const ingredients = [
+// // destructuring
+// const arr = [7, 8, 9];
+// console.log(...arr);
+// const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+// // copy array & join
+// const mainMenuCopy = [...restaurant.mainMenu, ...restaurant.starterMenu];
+// // const ingredients = [
 //   prompt('let`s make pasta! Ingredient 1?'),
 //   prompt('let`s make pasta! Ingredient 2?'),
 //   prompt('let`s make pasta! Ingredient 3?'),
